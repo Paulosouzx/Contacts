@@ -1,0 +1,29 @@
+﻿@model Contact
+
+@{
+    ViewData["Title"] = "Register new contact";
+}
+<div class="text-center">
+
+    <h1 class="display-5 mb-5">@ViewData["Title"]</h1>
+
+</div>
+    <form asp-controller="Contact" asp-action="Create" method="post">
+        <div class="form-group">
+            <label for="Name">Name</label>
+        <input type="text" class="form-control" asp-for="Name" placeholder="Enter the contact's name">
+        </div>
+        <div class="form-group">
+            <label for="email">E-mail</label>
+        <input type="text" class="form-control" asp-for="Email" placeholder="Enter the contact's E-mail">
+        </div>
+        <div class="form-group">
+            <label for="Phone">Phone Number</label>
+        <input type="text" class="form-control" asp-for="Phone" placeholder="Enter the contact's phone number">
+        </div>
+       
+        <button type="submit" class="btn btn-primary">Create</button>
+        <a asp-controller="Contact" asp-action="Index">Back to list</a>
+    </form>
+
+
