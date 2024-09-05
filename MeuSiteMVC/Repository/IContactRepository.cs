@@ -5,10 +5,11 @@ namespace MeuSiteMVC.Repository
 {
     public interface IContactRepository
     {
-        Contact IdList(int id);
-        List<Contact> GetAll(); 
-        Contact Adicionar(Contact contact);
-        Contact Refresh(Contact contact);
+        ContactModel IdList(int id);
+        List<ContactModel> GetAllPeople(); 
+        ContactModel Adc(ContactModel contact);
+        ContactModel Refresh(ContactModel contact);
+        bool Delete(int id);
 
     }
 }

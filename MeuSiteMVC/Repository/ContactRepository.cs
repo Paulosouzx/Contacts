@@ -1,5 +1,6 @@
 ﻿using MeuSiteMVC.Data;
 using MeuSiteMVC.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -13,16 +14,18 @@ namespace MeuSiteMVC.Repository
         {
             _bancoContext = bancoContext;
         }
-        public Contact IdList(int id)
+
+        public ContactModel IdList(int id)
         {
             return _bancoContext.Contacts.FirstOrDefault(x => x.ID == id);
         }
-        public List<Contact> GetAll()
+
+        public List<ContactModel> GetAllPeople()
         {
-            return _bancoContext.Contacts.ToList();
+             return _bancoContext.Contacts.ToList();
         }
 
-        public Contact Adicionar(Contact contact)
+        public ContactModel Adc(ContactModel contact)
         {
             //Gravar no banco de dados
             _bancoContext.Contacts.Add(contact);
@@ -30,22 +33,10 @@ namespace MeuSiteMVC.Repository
             return contact;
         }
 
-        public Contact Delete(Contact contact)
+        public ContactModel Refresh(ContactModel contact)
         {
-            _bancoContext.Contacts.Remove(contact);
-            _bancoContext.SaveChanges();
-            return contact;
-        }
 
-        public Contact Refresh(Contact contact)
-        {
-            Contact contactDB = IdList(contact.ID);
-
-            if (contactDB == null)
-            {
-                throw new System.Exception("Refresh error");
-            }
-
+            var contactDB = IdList(contact.ID) ?? throw new Exception("Contact not found");
             contactDB.Name = contact.Name;
             contactDB.Email = contact.Email;
             contactDB.Phone = contact.Phone;
@@ -53,6 +44,14 @@ namespace MeuSiteMVC.Repository
             _bancoContext.Contacts.Update(contactDB);
             _bancoContext.SaveChanges();
             return contact;
+        }
+
+        public bool Delete(int id)
+        {
+            var contactDB = IdList(id) ?? throw new Exception("Contact not can be deleted");
+            _bancoContext.Contacts.Remove(contactDB);
+            _bancoContext.SaveChanges();   
+            return true;
         }
     }
 }
