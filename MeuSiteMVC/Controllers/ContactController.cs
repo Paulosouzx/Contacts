@@ -17,7 +17,7 @@ namespace MeuSiteMVC.Controllers
 
         public IActionResult Index()
         {
-            List<Contact> contacts = _contactRepository.GetAll();
+            List<ContactModel> contacts = _contactRepository.GetAllPeople();
             return View(contacts);
         }
 
@@ -27,30 +27,51 @@ namespace MeuSiteMVC.Controllers
         }
 
 
-        public IActionResult Edit(int id)
+        public IActionResult Editar(int id)
         {
-            Contact contact = _contactRepository.IdList(id);
+            ContactModel contact = _contactRepository.IdList(id);
             return View(contact);
         }
 
-        public IActionResult Delete()
+        public IActionResult DeleteConfirm(int id)
         {
+
+            ContactModel contact = _contactRepository.IdList(id);
+            return View(contact);
+        }
+        public IActionResult Delete(int id)
+        {
+            _contactRepository.Delete(id);
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult Create(ContactModel contact)
+        {
+            if (ModelState.IsValid)
+            {
+
+                _contactRepository.Adc(contact);
+                return RedirectToAction("Index");
+            }
+
+            return View(contact);
+        }
+
+        [HttpPost]
+        public IActionResult Editar(ContactModel contact)
+        {
+
+            if (ModelState.IsValid)
+            {
+                _contactRepository.Refresh(contact);
+                return RedirectToAction("Index");
+            }
+
+            //Como o nome da view é o msm que da acao, entao nao forcamos uma entrada em outra view tipo("<View>", contact); 
             return View();
         }
 
-        [HttpPost]
-        public IActionResult Create(Contact contact)
-        {
-            _contactRepository.Adicionar(contact);
-            return RedirectToAction("Index");
-        }
-
-        [HttpPost]
-        public IActionResult Edit(Contact contact)
-        {
-            _contactRepository.Adicionar(contact);
-            return RedirectToAction("Index");
-        }
-
+        
     }
 }
