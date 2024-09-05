@@ -4,7 +4,27 @@
     <div class="d-grid gap-2 d-md-flex justify-content-md-start">
         <a asp-controller="Contact" asp-action="Create" class="btn btn-success" role="button">Create New</a>
     </div>
+
+    @if (TempData["messageSuccess"] != null)
+    {
+        <div class="alert alert-success mt-3" role="alert">
+            <button type="button" class="btn btn-danger btn-sm close-alert text-left text-white" aria-label="Close">X</button>
+            <p class="mt-3" style="font: bold;">@TempData["messageSuccess"]</p>
+        </div>   
+    }
+
+    @if (TempData["messageError"] != null)
+    {
+        <div class="alert alert-success position-relative mt-3" role="alert">
+            <button type="button" class="btn text-danger btn-sm close-alert text-left" aria-label="Close">X</button>
+            <p>@TempData["messageError"]</p>
+        </div>
+    }
+
+
+
     <h1 class="display-5 mb-5">Contact List</h1>
+
 
     <table class="table">
         <thead>

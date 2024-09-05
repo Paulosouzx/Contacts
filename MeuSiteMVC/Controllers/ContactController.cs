@@ -41,35 +41,76 @@ namespace MeuSiteMVC.Controllers
         }
         public IActionResult Delete(int id)
         {
-            _contactRepository.Delete(id);
-            return RedirectToAction("Index");
+            try
+            {
+               bool deleted = _contactRepository.Delete(id);
+
+                if (deleted) 
+                {
+                    TempData["messageSuccess"] = "Contact Deleted successfully";
+                }
+                else
+                {
+                    TempData["messageError"] = $"Ops, Failed to Delete the contact";
+                }
+
+                    return RedirectToAction("Index");
+            }
+
+            catch (System.Exception e)
+            {
+                TempData["messageError"] = $"Ops, Failed to Delete the contact, Error details: {e.Message}";
+                return RedirectToAction("Index");
+
+            }
         }
 
         [HttpPost]
         public IActionResult Create(ContactModel contact)
         {
-            if (ModelState.IsValid)
+            try
             {
+                if (ModelState.IsValid)
+                {
 
-                _contactRepository.Adc(contact);
-                return RedirectToAction("Index");
+                    _contactRepository.Adc(contact);
+                    TempData["messageSuccess"] = "Contact added successfully";
+                    return RedirectToAction("Index");
+                }
+
+                return View(contact);
+            }
+            catch (System.Exception e)
+            {
+                TempData["messageError"] = $"Ops, Failed to add contact, Error details: {e.Message}";
+                return RedirectToAction("Index");   
+
             }
 
-            return View(contact);
         }
 
         [HttpPost]
         public IActionResult Editar(ContactModel contact)
         {
 
-            if (ModelState.IsValid)
+            try
             {
-                _contactRepository.Refresh(contact);
-                return RedirectToAction("Index");
-            }
+                if (ModelState.IsValid)
+                {
+                    _contactRepository.Refresh(contact);
+                    TempData["messageSuccess"] = "Contact Altered successfully";
+                    return RedirectToAction("Index");
+                }
 
-            //Como o nome da view é o msm que da acao, entao nao forcamos uma entrada em outra view tipo("<View>", contact); 
-            return View();
+                //Como o nome da view é o msm que da acao, entao nao forcamos uma entrada em outra view tipo("<View>", contact); 
+                return View();
+            }
+            catch (System.Exception e)
+            {
+                TempData["messageError"] = $"Ops, Failed to Alter contact, Error details: {e.Message}";
+                return RedirectToAction("Index");
+
+            }
         }
 
         

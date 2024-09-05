@@ -69,3 +69,24 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+.close-alert {
+    position: absolute;
+    right: 10px; /* Alinhar à direita dentro do contêiner */
+    top: 15px; /* Alinhar ao topo dentro do contêiner */
+    border-radius: 5px;
+    color: white;
+    width: 30px;
+    height: 32px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.close-alert:hover{
+    color:red;
+    Background-color: none;
+}
+
+.close-alert p{
+    top: 10px;
+}
