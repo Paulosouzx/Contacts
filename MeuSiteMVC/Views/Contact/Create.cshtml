@@ -1,4 +1,4 @@
-﻿@model Contact
+﻿@model ContactModel
 
 @{
     ViewData["Title"] = "Register new contact";
@@ -12,14 +12,25 @@
         <div class="form-group">
             <label for="Name">Name</label>
         <input type="text" class="form-control" asp-for="Name" placeholder="Enter the contact's name">
+            <div class="text-danger">
+                @Html.ValidationMessageFor(x => x.Name)
+            </div>
         </div>
         <div class="form-group">
             <label for="email">E-mail</label>
         <input type="text" class="form-control" asp-for="Email" placeholder="Enter the contact's E-mail">
+            <div class="text-danger">
+                @Html.ValidationMessageFor(x => x.Email)
+            </div>
+
         </div>
         <div class="form-group">
             <label for="Phone">Phone Number</label>
         <input type="text" class="form-control" asp-for="Phone" placeholder="Enter the contact's phone number">
+            <div class="text-danger">
+                @Html.ValidationMessageFor(x => x.Phone)
+            </div>
+
         </div>
        
         <button type="submit" class="btn btn-primary">Create</button>
