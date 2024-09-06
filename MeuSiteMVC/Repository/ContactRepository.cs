@@ -43,7 +43,7 @@ namespace MeuSiteMVC.Repository
 
             _bancoContext.Contacts.Update(contactDB);
             _bancoContext.SaveChanges();
-            return contact;
+            return contactDB;
         }
 
         public bool Delete(int id)

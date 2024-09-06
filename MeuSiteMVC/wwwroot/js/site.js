@@ -5,8 +5,5 @@ $('.close-alert').click(function () {
 });
 
 
+let table = new DataTable('#table-contacts', '#table-user');
 
-
-
-
-let table = new DataTable('#table-contacts');
