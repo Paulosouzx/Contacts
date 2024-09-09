@@ -26,7 +26,10 @@ namespace MeuSiteMVC.Models
         public DateTime DataRegistration { get; set; }
         public DateTime DataUpdate { get; set; }
 
-        public UserModel() { }
+        public bool ValidPass(string password)
+        {
+            return Password == password;
+        }
 
 
     }

@@ -15,6 +15,12 @@ namespace MeuSiteMVC.Repository
             _bancoContext = bancoContext;
         }
 
+        public UserModel SearchLogin(string login)
+        {
+            return _bancoContext.Users.FirstOrDefault(x => x.Login.ToUpper() == login.ToUpper());
+
+        }
+
         public UserModel IdList(int id)
         {
             return _bancoContext.Users.FirstOrDefault(x => x.ID == id);
@@ -56,5 +62,7 @@ namespace MeuSiteMVC.Repository
             _bancoContext.SaveChanges();   
             return true;
         }
+
+        
     }
 }

@@ -5,6 +5,8 @@ namespace MeuSiteMVC.Repository
 {
     public interface IUserRepository
     {
+        UserModel SearchLogin(string login);
+
         UserModel IdList(int id);
         List<UserModel> GetAllPeople(); 
         UserModel Adc(UserModel user);
