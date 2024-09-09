@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MeuSiteMVC.Models
 {
-    public class UserModel
+    public class UserWithoutPassModel
     {
         public int ID { get; set; }
 
@@ -21,12 +21,7 @@ namespace MeuSiteMVC.Models
         [Required(ErrorMessage = "Enter User's Perfil")]
         public PerfilEnum? Perfil { get; set; }
 
-        [Required(ErrorMessage = "Enter User's Password")]
-        public string Password { get; set; }
-        public DateTime DataRegistration { get; set; }
-        public DateTime DataUpdate { get; set; }
 
-        public UserModel() { }
 
 
     }
