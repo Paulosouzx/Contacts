@@ -1,0 +1,51 @@
+﻿@model UserModel
+@using MeuSiteMVC.Enums;
+
+
+<div class="text-center">
+    <h1 class="display-5 mb-5">Change User</h1>
+</div>
+
+
+<form asp-controller="User" asp-action="Editar" method="post">
+    <input type="hidden" asp-for="ID" />
+
+    <div class="form-group">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" asp-for="Name" class="form-control" placeholder="Enter the user's name" />
+        <div class="text-danger">
+            @Html.ValidationMessageFor(x => x.Name)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="email" class="form-label">E-mail</label>
+        <input type="text" asp-for="Email" class="form-control" placeholder="Enter the user's E-mail" />
+        <div class="text-danger">
+            @Html.ValidationMessageFor(x => x.Email)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="phone" class="form-label">Login</label>
+        <input type="text" asp-for="Login" class="form-control" placeholder="Enter the user's Login" />
+        <div class="text-danger">
+            @Html.ValidationMessageFor(x => x.Login)
+            </div>
+    </div>
+
+    <div class="form-group mt-4">
+        <label for="Perfil">Perfil</label>
+        <select asp-for="Perfil" class="form-control">
+            <option value="">--Select--</option>
+            <option value="@PerfilEnum.Admin">Admin</option>
+            <option value="@PerfilEnum.Default">Default</option>
+        </select>
+        <div class="text-danger">
+            @Html.ValidationMessageFor(x => x.Perfil)
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Change</button>
+    <a asp-controller="User" class="mt-5" asp-action="Index">Back to list</a>
+</form>

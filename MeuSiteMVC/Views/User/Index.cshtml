@@ -1,8 +1,10 @@
 ﻿@model List<UserModel>
+@using MeuSiteMVC.Enums;
+
 <div class="text-center">
 
     <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-        <a asp-controller="User" asp-action="Create" class="btn btn-success" role="button">Create New User</a>
+        <a asp-controller="User" asp-action="Editar" class="btn btn-success" role="button">Create New User</a>
     </div>
 
     @if (TempData["messageSuccess"] != null)
@@ -15,8 +17,8 @@
 
     @if (TempData["messageError"] != null)
     {
-        <div class="alert alert-success position-relative mt-3" role="alert">
-            <button type="button" class="btn text-danger btn-sm close-alert text-left" aria-label="Close">X</button>
+        <div class="alert alert-danger position-relative mt-3" role="alert">
+            <button type="button" class="btn text-white btn-sm close-alert text-left" aria-label="Close">X</button>
             <p>@TempData["messageError"]</p>
         </div>
     }
@@ -33,6 +35,7 @@
                 <th scope="col">Name</th>
                 <th scope="col">Login</th>
                 <th scope="col">Email</th>
+                <th scope="col">Perfil</th>
                 <th scope="col">Registration Date</th>
                 <th scope="col"></th>
             </tr>
@@ -47,13 +50,14 @@
                         <td>@user.Name</td>
                         <td>@user.Login</td>
                         <td>@user.Email</td>
+                        <td>@user.Perfil</td>
                         <td>@user.DataRegistration</td>
                         <td>
 
 
                             <div>
-                                <a role="button" class="btn btn-primary btn-sm text-white" asp-route-id="@user.ID" asp-controller="Contact" asp-action="Editar">Edit</a>
-                                <a role="button" class="btn btn-danger btn-sm text-white" asp-route-id="@user.ID" asp-controller="Contact" asp-action="DeleteConfirm">Delete</a>
+                                <a role="button" class="btn btn-primary btn-sm text-white" asp-route-id="@user.ID" asp-controller="User" asp-action="Editar">Edit</a>
+                                <a role="button" class="btn btn-danger btn-sm text-white" asp-route-id="@user.ID" asp-controller="User" asp-action="DeleteConfirm">Delete</a>
                             </div>
                         </td>
                     </tr>
