@@ -61,6 +61,7 @@ html {
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
+  //background-color: aqua
 }
 .footer {
   position: absolute;
@@ -89,4 +90,8 @@ body {
 
 .close-alert p{
     top: 10px;
+}
+
+.bg-custom {
+    background-color: #001A56 important;
 }

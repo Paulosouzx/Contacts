@@ -1,4 +1,5 @@
-﻿using MeuSiteMVC.Models;
+﻿using MeuSiteMVC.Helper;
+using MeuSiteMVC.Models;
 using MeuSiteMVC.Repository;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -9,15 +10,28 @@ namespace MeuSiteMVC.Controllers
     {
 
         private readonly IUserRepository _userRepository;
+        private readonly ISessao _sessao;
 
-        public LoginController(IUserRepository userRepository)
+        public LoginController(IUserRepository userRepository, ISessao sessao)
         {
             _userRepository = userRepository;
+            _sessao = sessao;
         }
 
         public IActionResult Index()
         {
+            //se o user estiver logado, ja sera direcionado para a home
+
+            if(_sessao.GetSessionUser() != null) return RedirectToAction("Index", "Home");
+
             return View();
+        }
+
+        public IActionResult Exit()
+        {
+            _sessao.RemoveSessionUser();
+
+            return RedirectToAction("Index", "Login");
         }
 
         [HttpPost]
@@ -36,6 +50,7 @@ namespace MeuSiteMVC.Controllers
 
                             if (user.ValidPass(loginModel.Password))
                             {
+                                _sessao.CreateSessionUser(user);
                                 return RedirectToAction("Index", "Home");
                             }
 

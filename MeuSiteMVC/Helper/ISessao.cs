@@ -2,7 +2,7 @@
 
 namespace MeuSiteMVC.Helper
 {
-    public interface ISession
+    public interface ISessao
     {
         void CreateSessionUser(UserModel user);
         void RemoveSessionUser();

@@ -4,38 +4,36 @@ using Newtonsoft.Json;
 
 namespace MeuSiteMVC.Helper
 {
-    public class Session : ISession
+    public class Sessao : ISessao
     {
 
         private readonly IHttpContextAccessor _contextAccessor;
 
-        public Session(IHttpContextAccessor contextAccessor)
+        public Sessao(IHttpContextAccessor contextAccessor)
         {
             _contextAccessor = contextAccessor;
         }
         
         public void CreateSessionUser(UserModel user)
         {
-            string value = JsonConvert.SerializeObject(user);
+            string userValue = JsonConvert.SerializeObject(user);
 
-            _contextAccessor.HttpContext.Session.SetString("SessionLogedUser", value);
+            _contextAccessor.HttpContext.Session.SetString("sessionLogedUser", userValue);
         }
 
         public UserModel GetSessionUser()
         {
-            string sessionUser = _contextAccessor.HttpContext.Session.GetString("SessionLogedUser");
+            string sessionUser = _contextAccessor.HttpContext.Session.GetString("sessionLogedUser");
 
-            if (string.IsNullOrEmpty(sessionUser))
-            {
-                return null;
-            }
+            if (string.IsNullOrEmpty(sessionUser)) return null;
+            
 
             return JsonConvert.DeserializeObject<UserModel>(sessionUser);
         }
 
         public void RemoveSessionUser()
         {
-            _contextAccessor.HttpContext.Session.Remove("SessionLogedUser");
+            _contextAccessor.HttpContext.Session.Remove("sessionLogedUser");
         }
     }
 }
