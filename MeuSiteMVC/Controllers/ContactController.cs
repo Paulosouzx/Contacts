@@ -47,7 +47,7 @@ namespace MeuSiteMVC.Controllers
 
                 if (deleted) 
                 {
-                    TempData["messageSuccess"] = "Contact Deleted successfully";
+                    TempData["messageSuccess"] = "User Deleted successfully";
                 }
                 else
                 {
@@ -59,7 +59,7 @@ namespace MeuSiteMVC.Controllers
 
             catch (System.Exception e)
             {
-                TempData["messageError"] = $"Ops, Failed to Delete the contact, Error details: {e.Message}";
+                TempData["messageError"] = $"Ops, Failed to Delete the user, Error details: {e.Message}";
                 return RedirectToAction("Index");
 
             }
@@ -74,7 +74,7 @@ namespace MeuSiteMVC.Controllers
                 {
 
                     _contactRepository.Adc(contact);
-                    TempData["messageSuccess"] = "Contact added successfully";
+                    TempData["messageSuccess"] = "User added successfully";
                     return RedirectToAction("Index");
                 }
 
@@ -82,7 +82,7 @@ namespace MeuSiteMVC.Controllers
             }
             catch (System.Exception e)
             {
-                TempData["messageError"] = $"Ops, Failed to add contact, Error details: {e.Message}";
+                TempData["messageError"] = $"Ops, Failed to add user, Error details: {e.Message}";
                 return RedirectToAction("Index");   
 
             }
@@ -98,7 +98,7 @@ namespace MeuSiteMVC.Controllers
                 if (ModelState.IsValid)
                 {
                     _contactRepository.Refresh(contact);
-                    TempData["messageSuccess"] = "Contact Altered successfully";
+                    TempData["messageSuccess"] = "User Altered successfully";
                     return RedirectToAction("Index");
                 }
 
@@ -107,7 +107,7 @@ namespace MeuSiteMVC.Controllers
             }
             catch (System.Exception e)
             {
-                TempData["messageError"] = $"Ops, Failed to Alter contact, Error details: {e.Message}";
+                TempData["messageError"] = $"Ops, Failed to Alter user, Error details: {e.Message}";
                 return RedirectToAction("Index");
 
             }

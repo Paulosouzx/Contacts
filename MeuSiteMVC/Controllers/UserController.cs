@@ -27,6 +27,19 @@ namespace MeuSiteMVC.Controllers
             return View();
         }
 
+        public IActionResult DeleteConfirm(int id)
+        {
+
+            UserModel user = _userRepository.IdList(id);
+            return View(user);
+        }
+
+        public IActionResult Editar(int id)
+        {
+            UserModel user = _userRepository.IdList(id);
+            return View(user);
+        }
+
         [HttpPost]
         public IActionResult Create(UserModel user)
         {
@@ -49,6 +62,67 @@ namespace MeuSiteMVC.Controllers
 
             }
 
+        }
+
+            public IActionResult Delete(int id)
+            {
+                try
+                {
+                    bool deleted = _userRepository.Delete(id);
+
+                    if (deleted)
+                    {
+                        TempData["messageSuccess"] = "Contact Deleted successfully";
+                    }
+                    else
+                    {
+                        TempData["messageError"] = $"Ops, Failed to Delete the contact";
+                    }
+
+                    return RedirectToAction("Index");
+                }
+
+                catch (System.Exception e)
+                {
+                    TempData["messageError"] = $"Ops, Failed to Delete the contact, Error details: {e.Message}";
+                    return RedirectToAction("Index");
+
+                }
+            }
+
+        [HttpPost]
+        public IActionResult Editar(UserWithoutPassModel userWithoutPass)
+        {
+
+            try
+            {
+                UserModel user = null;
+
+                if (ModelState.IsValid)
+                {
+                    user = new UserModel() {
+                        ID = userWithoutPass.ID,
+                        Name = userWithoutPass.Name,
+                        Login = userWithoutPass.Login,
+                        Email = userWithoutPass.Email,
+                        Perfil = userWithoutPass.Perfil
+                    };
+                    
+
+                    _userRepository.Refresh(user);
+                    TempData["messageSuccess"] = "Contact Altered successfully";
+                    return RedirectToAction("Index");
+                }
+
+                //Como o nome da view é o msm que da acao, entao nao forcamos uma entrada em outra view tipo("<View>", contact); 
+                return View();
+            }
+            catch (System.Exception e)
+            {
+                TempData["messageError"] = $"Ops, Failed to Alter contact, Error details: {e.Message}";
+                return RedirectToAction("Index");
+
+            }
         }
     }
 }
