@@ -1,10 +1,13 @@
-﻿using MeuSiteMVC.Models;
+﻿using MeuSiteMVC.Filters;
+using MeuSiteMVC.Models;
 using MeuSiteMVC.Repository;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
 namespace MeuSiteMVC.Controllers
 {
+
+    [PageForLogedUser]
     public class UserController : Controller
     {
 

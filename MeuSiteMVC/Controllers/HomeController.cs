@@ -1,14 +1,11 @@
-﻿using MeuSiteMVC.Models;
+﻿using MeuSiteMVC.Filters;
+using MeuSiteMVC.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MeuSiteMVC.Controllers
 {
+    [PageForLogedUser]
     public class HomeController : Controller
     {
         public IActionResult Index()

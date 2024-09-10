@@ -1,4 +1,5 @@
-﻿using MeuSiteMVC.Helper;
+﻿using MeuSiteMVC.Filters;
+using MeuSiteMVC.Helper;
 using MeuSiteMVC.Models;
 using MeuSiteMVC.Repository;
 using Microsoft.AspNetCore.Mvc;
@@ -6,6 +7,7 @@ using System;
 
 namespace MeuSiteMVC.Controllers
 {
+
     public class LoginController : Controller
     {
 
