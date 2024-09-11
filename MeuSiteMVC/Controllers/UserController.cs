@@ -7,7 +7,7 @@ using System.Collections.Generic;
 namespace MeuSiteMVC.Controllers
 {
 
-    [PageForLogedUser]
+    [RetrictPageAdm]
     public class UserController : Controller
     {
 
