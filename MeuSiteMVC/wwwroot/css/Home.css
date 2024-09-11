@@ -108,10 +108,25 @@ body {
 
     .btn-custom:hover {
         transform: scale(1.1);
-        color:white;
+        color: white;
     }
 
 
-#home{
-    color: white
+
+
+#home {
+    background: #001A56;
+    color: white;
+    padding-top: 90px
 }
+
+.custom-page-bg {
+    background-color: white; /* Escolha a cor que deseja */
+    overflow: hidden;
+}
+
+.caixa{
+    padding-top: 100px;
+}
+
+
