@@ -93,6 +93,8 @@ namespace MeuSiteMVC.Controllers
 
                     if (user != null)
                     {
+                        string newPass = user.GenerateNewPassword();
+
                     TempData["messageSuccess"] = $"Was send for your registred e-mail a new password";
                         RedirectToAction("Index", "Login");
                     }
