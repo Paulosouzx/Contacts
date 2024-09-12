@@ -6,10 +6,21 @@
 
 @if (TempData["messageError"] != null)
 {
-    <div class="alert alert-danger mt-3" role="alert">
-        <p class="text-center">@TempData["messageError"]</p>
+    <div class="alert alert-danger" role="alert">
+        <button type="button" class="btn btn-danger btn-sm close-alert" data-bs-dismiss="alert" aria-label="Close">X</button>
+        @TempData["messageError"]
     </div>
 }
+
+
+@if (TempData["messageSuccess"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        <button type="button" class="btn btn-danger btn-sm close-alert" data-bs-dismiss="alert" aria-label="Close">X</button>
+        @TempData["messageSuccess"]
+    </div>
+}
+
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -57,9 +68,9 @@
                         </div>
 
                         <div class="text-right">
-                            <a href="#" class="forget-link">
-                                Forget Password?
-                            </a>
+                            <p class="forget-link" >
+                                <a asp-controller="Login" asp-action="ResetPassword">Forget Password?</a>
+                            </p>
                         </div>
                         <hr class="my-4">
                         <div class="text-center mb-2">

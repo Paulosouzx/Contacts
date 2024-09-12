@@ -1,4 +1,5 @@
 ﻿@model List<ContactModel>
+
 <div class="text-center">
 
     <div class="d-grid gap-2 d-md-flex justify-content-md-start">
@@ -25,7 +26,6 @@
 
     <h1 class="display-5 mb-5">Contact List</h1>
 
-
     <table class="table" id="table-contacts">
         <thead>
             <tr>
@@ -50,7 +50,7 @@
 
 
                             <div>
-                                <a role="button" class="btn btn-primary btn-sm text-white" asp-route-id="@contact.ID" asp-controller="Contact" asp-action="Editar">Edit</a>
+                                <a role="button" class="btn btn-primary btn-sm text-white" asp-route-id="@contact.ID" asp-controller="Contact" asp-action="Editar"><i class="fa fa-edit"></i>a</a>
                                 <a role="button" class="btn btn-danger btn-sm text-white" asp-route-id="@contact.ID" asp-controller="Contact" asp-action="DeleteConfirm">Delete</a>
                             </div>
                         </td>
@@ -63,3 +63,4 @@
 </div>
 
 
+<script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>

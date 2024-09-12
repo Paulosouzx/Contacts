@@ -20,6 +20,11 @@ namespace MeuSiteMVC.Repository
             return _bancoContext.Users.FirstOrDefault(x => x.Login.ToUpper() == login.ToUpper());
 
         }
+        public UserModel SearchLoginAndLogin(string login, string email)
+        {
+            return _bancoContext.Users.FirstOrDefault(x => x.Login.ToUpper() == login.ToUpper() && x.Email.ToUpper() == email.ToUpper());
+
+        }
 
         public UserModel IdList(int id)
         {
@@ -35,6 +40,7 @@ namespace MeuSiteMVC.Repository
         {
             //Gravar no banco de dados
             user.DataRegistration = DateTime.Now;
+            user.SetPassHash();
             _bancoContext.Users.Add(user);
             _bancoContext.SaveChanges();
             return user;
@@ -63,6 +69,5 @@ namespace MeuSiteMVC.Repository
             return true;
         }
 
-        
     }
 }

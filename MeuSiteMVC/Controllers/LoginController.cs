@@ -36,6 +36,12 @@ namespace MeuSiteMVC.Controllers
             return RedirectToAction("Index", "Login");
         }
 
+        public IActionResult ResetPassword()
+        {
+            return View();
+        }
+
+
         [HttpPost]
         public IActionResult Enter(LoginModel loginModel)
         {
@@ -71,6 +77,38 @@ namespace MeuSiteMVC.Controllers
                 TempData["messageError"] = $"Ops, Failed to login , Error details: {e.Message}";
                 return View("Index");
             }
+        }
+
+
+        [HttpPost]
+        public IActionResult SendLinkToResetPassword(ResetPasswordModel resetPassword)
+        {
+            try
+            {
+
+                if (ModelState.IsValid)
+                {
+
+                    UserModel user = _userRepository.SearchLoginAndLogin(resetPassword.Login, resetPassword.Email);
+
+                    if (user != null)
+                    {
+                    TempData["messageSuccess"] = $"Was send for your registred e-mail a new password";
+                        RedirectToAction("Index", "Login");
+                    }
+
+
+                }
+                    TempData["messageError"] = $"Opss... We are unable to reset your password. Try again, Check your informed data";
+
+                return View("Index");
+            }
+            catch (Exception e)
+            {
+                TempData["messageError"] = $"Ops, We are unable to reset your password, Error details: {e.Message}";
+                return View("Index");
+            }
+
         }
     }
 }

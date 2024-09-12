@@ -1,4 +1,5 @@
 ﻿using MeuSiteMVC.Enums;
+using MeuSiteMVC.Helper;
 using System;
 using System.ComponentModel.DataAnnotations;
 
@@ -28,9 +29,12 @@ namespace MeuSiteMVC.Models
 
         public bool ValidPass(string password)
         {
-            return Password == password;
+            return Password == password.HashGenerator();
         }
-
-
+            
+        public void SetPassHash()
+        {
+            Password = Password.HashGenerator();
+        }
     }
 }
