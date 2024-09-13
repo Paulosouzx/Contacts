@@ -13,11 +13,13 @@ namespace MeuSiteMVC.Controllers
 
         private readonly IUserRepository _userRepository;
         private readonly ISessao _sessao;
+        private readonly IEmail _email;
 
-        public LoginController(IUserRepository userRepository, ISessao sessao)
+        public LoginController(IUserRepository userRepository, ISessao sessao, IEmail email)
         {
             _userRepository = userRepository;
             _sessao = sessao;
+            _email = email;
         }
 
         public IActionResult Index()
@@ -94,14 +96,24 @@ namespace MeuSiteMVC.Controllers
                     if (user != null)
                     {
                         string newPass = user.GenerateNewPassword();
+                        string mensagem = $"Your new password's: {newPass}";
+                        bool emailSend = _email.Send(user.Email, "Contact System - New Password", mensagem);
 
-                    TempData["messageSuccess"] = $"Was send for your registred e-mail a new password";
+                        if (emailSend)
+                        {
+                            _userRepository.Refresh(user);
+                            TempData["messageSuccess"] = $"Was send for your registred e-mail a new password";
+                        }
+                        else
+                        {
+                            TempData["messageError"] = $"Opss... We are unable to send the email. Try again, Check your informed data";
+                        }
+
                         RedirectToAction("Index", "Login");
                     }
 
-
-                }
                     TempData["messageError"] = $"Opss... We are unable to reset your password. Try again, Check your informed data";
+                }
 
                 return View("Index");
             }
