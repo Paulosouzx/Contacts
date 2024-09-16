@@ -91,13 +91,15 @@ namespace MeuSiteMVC.Controllers
                 if (ModelState.IsValid)
                 {
 
-                    UserModel user = _userRepository.SearchLoginAndLogin(resetPassword.Login, resetPassword.Email);
+                    UserModel user = _userRepository.SearchEmailAndLogin(resetPassword.Email, resetPassword.Login);
 
                     if (user != null)
                     {
                         string newPass = user.GenerateNewPassword();
-                        string mensagem = $"Your new password's: {newPass}";
-                        bool emailSend = _email.Send(user.Email, "Contact System - New Password", mensagem);
+                        _userRepository.Refresh(user);
+                        string message = $"Your new password's: {newPass}";
+
+                        bool emailSend = _email.Send(user.Email, "Contact System - New Password", message);
 
                         if (emailSend)
                         {
@@ -109,10 +111,9 @@ namespace MeuSiteMVC.Controllers
                             TempData["messageError"] = $"Opss... We are unable to send the email. Try again, Check your informed data";
                         }
 
+                        TempData["messageSuccess"] = $"We send a new password. Check your Email";
                         RedirectToAction("Index", "Login");
                     }
-
-                    TempData["messageError"] = $"Opss... We are unable to reset your password. Try again, Check your informed data";
                 }
 
                 return View("Index");
