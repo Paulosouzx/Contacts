@@ -37,6 +37,11 @@ namespace MeuSiteMVC.Models
             Password = Password.HashGenerator();
         }
 
+        public void SetNewPassword(string newPass)
+        {
+            Password = newPass.HashGenerator();
+        }
+
         public string GenerateNewPassword()
         {
             string newPass = Guid.NewGuid().ToString().Substring(0, 8);
