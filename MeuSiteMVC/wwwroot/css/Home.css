@@ -131,3 +131,27 @@ body {
 }
 
 
+.close-alert {
+    position: absolute;
+    right: 10px; /* Alinhar à direita dentro do contêiner */
+    top: 10px; /* Alinhar ao topo dentro do contêiner */
+    border-radius: 5px;
+    color: white;
+    width: 30px;
+    height: 32px;
+    font-weight: bold;
+    font-size: 18px;
+    display: block;
+    cursor: pointer; /* Adiciona um cursor de ponteiro */
+}
+
+    .close-alert:hover {
+        color: red;
+        background-color: red; /* Definir cor de fundo transparente ao passar o mouse */
+    }
+
+    .close-alert p {
+        margin: 0;
+        line-height: 32px; /* Centralizar verticalmente o texto */
+        text-align: center; /* Centralizar horizontalmente o "X" */
+    }

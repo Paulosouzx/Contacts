@@ -10,7 +10,7 @@ namespace MeuSiteMVC.Repository
     {
         private readonly BancoContext _bancoContext;
 
-        public UserRepository(BancoContext bancoContext) 
+        public UserRepository(BancoContext bancoContext)
         {
             _bancoContext = bancoContext;
         }
@@ -20,9 +20,9 @@ namespace MeuSiteMVC.Repository
             return _bancoContext.Users.FirstOrDefault(x => x.Login.ToUpper() == login.ToUpper());
 
         }
-        public UserModel SearchLoginAndLogin(string login, string email)
+        public UserModel SearchEmailAndLogin(string email, string login)
         {
-            return _bancoContext.Users.FirstOrDefault(x => x.Login.ToUpper() == login.ToUpper() && x.Email.ToUpper() == email.ToUpper());
+            return _bancoContext.Users.FirstOrDefault(x => x.Email.ToUpper() == email.ToUpper() && x.Login.ToUpper() == login.ToUpper());
 
         }
 
@@ -33,7 +33,7 @@ namespace MeuSiteMVC.Repository
 
         public List<UserModel> GetAllPeople()
         {
-             return _bancoContext.Users.ToList();
+            return _bancoContext.Users.ToList();
         }
 
         public UserModel Adc(UserModel user)
@@ -54,7 +54,7 @@ namespace MeuSiteMVC.Repository
             userDB.Email = user.Email;
             userDB.Login = user.Login;
             userDB.DataUpdate = DateTime.Now;
-           userDB.Perfil = user.Perfil;
+            userDB.Perfil = user.Perfil;
 
             _bancoContext.Users.Update(userDB);
             _bancoContext.SaveChanges();
@@ -65,9 +65,30 @@ namespace MeuSiteMVC.Repository
         {
             var userDB = IdList(id) ?? throw new Exception("Contact not can be deleted");
             _bancoContext.Users.Remove(userDB);
-            _bancoContext.SaveChanges();   
+            _bancoContext.SaveChanges();
             return true;
         }
 
+
+        public UserModel ChangePassword(ChangePasswordModel changePassword)
+        {
+            UserModel userDB = IdList(changePassword.ID);
+
+            if (userDB == null) throw new Exception("Error in change the password, user not found.");
+
+            if (!userDB.ValidPass(changePassword.CurrentPass)) throw new Exception("Current password does not match");
+
+            if (userDB.ValidPass(changePassword.NewPass)) throw new Exception("New password needs to be different from the current password");
+
+            userDB.SetNewPassword(changePassword.NewPass);
+            userDB.DataUpdate = DateTime.Now;
+
+            _bancoContext.Users.Update(userDB);
+            _bancoContext.SaveChanges();
+
+            return userDB;
+
+
+        }
     }
 }

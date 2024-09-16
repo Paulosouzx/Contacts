@@ -1,0 +1,74 @@
+﻿@model ChangePasswordModel
+@using MeuSiteMVC.Enums;
+
+@{
+    Layout = "_LayoutLogin";
+    ViewData["Title"] = "Reset Password";
+}
+
+@if (TempData["messageSuccess"] != null)
+{
+    <div class="alert alert-success mt-3" role="alert">
+        <button type="button" class="btn btn-danger btn-sm close-alert text-left text-white" aria-label="Close">X</button>
+        <p class="mt-3" style="font: bold;">@TempData["messageSuccess"]</p>
+    </div>
+}
+
+@if (TempData["messageError"] != null)
+{
+    <div class="alert alert-danger position-relative mt-3" role="alert">
+        <button type="button" class="btn text-white btn-sm close-alert text-left" aria-label="Close">X</button>
+        <p>@TempData["messageError"]</p>
+    </div>
+}
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<body>
+    <div class="container">
+        <div class="row px-3">
+            <div class="col-lg-10 col-xl-5 card flex-row mx-auto px-0">
+                <div class="card-body p-4">
+                    <div class="mb-3">
+                    </div>
+
+                    <h4 class="title text-center mt-4">
+                        Change User
+                    </h4>
+                    <form class="form-box p-1" asp-controller="ResetPassword" asp-action="Change" method="post">
+                        <div class="form-input mb-2">
+                            <span><i class="fa fa-key" aria-hidden="true"></i></span>
+                            <input type="text" asp-for="CurrentPass" placeholder="Current Pass">
+                        </div>
+                        <div class="text-danger mb-1">
+                            @Html.ValidationMessageFor(x => x.CurrentPass)
+                        </div>
+                        <div class="form-input mb-2">
+                            <span><i class="fa fa-unlock" aria-hidden="true"></i></span>
+                            <input type="text" asp-for="NewPass" id="newPass" placeholder="NewPass">
+                        </div>
+                        <div class="text-danger">
+                            @Html.ValidationMessageFor(x => x.NewPass)
+                        </div>
+                        <div class="form-input mb-2">
+                            <span><i class="fa fa-unlock" aria-hidden="true"></i></span>
+                            <input type="text" asp-for="ConfirmPass" id="confirmPass" placeholder="Confirm Pass">
+                        </div>
+                        <div class="text-danger">
+                            @Html.ValidationMessageFor(x => x.ConfirmPass)
+                        </div>
+
+                        <div class="mb-3 text-center">
+                            <button  type="submit" class="btn btn-block btn-custom text-uppercase mb-3 mt-3">
+                                Reset Pass
+                            </button>
+                            <a asp-controller="Home" class="text-uppercase" asp-action="Index">Back to Home</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

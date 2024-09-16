@@ -18,13 +18,14 @@ namespace MeuSiteMVC.Helper
         {
             try
             {
-                string host = _configuration.GetValue<string>("SMTP:Host");
-                string name = _configuration.GetValue<string>("SMTP:Name");
                 string username = _configuration.GetValue<string>("SMTP:UserName");
+                string name = _configuration.GetValue<string>("SMTP:Name");
+                string host = _configuration.GetValue<string>("SMTP:Host");
                 string password = _configuration.GetValue<string>("SMTP:Password");
                 int porta = _configuration.GetValue<int>("SMTP:Porta");
 
-                MailMessage mailMessage = new MailMessage() {
+                MailMessage mailMessage = new MailMessage() 
+                {
                     From = new MailAddress(username, name)
                 };
 
@@ -38,10 +39,11 @@ namespace MeuSiteMVC.Helper
                 {
                     smtp.Credentials = new NetworkCredential(username, password);
                     smtp.EnableSsl = true;
+
                     smtp.Send(mailMessage);
+                    return true;
                 };
 
-                return true;
             }
             catch (Exception e)
             {

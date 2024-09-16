@@ -4,20 +4,19 @@
     ViewData["Title"] = "Login";
 }
 
-@if (TempData["messageError"] != null)
-{
-    <div class="alert alert-danger" role="alert">
-        <button type="button" class="btn btn-danger btn-sm close-alert" data-bs-dismiss="alert" aria-label="Close">X</button>
-        @TempData["messageError"]
-    </div>
-}
-
-
 @if (TempData["messageSuccess"] != null)
 {
     <div class="alert alert-success" role="alert">
+        <p class="text-center">@TempData["messageSuccess"]</p>
         <button type="button" class="btn btn-danger btn-sm close-alert" data-bs-dismiss="alert" aria-label="Close">X</button>
-        @TempData["messageSuccess"]
+    </div>
+}
+
+@if (TempData["messageError"] != null)
+{
+    <div class="alert alert-danger position-relative mt-3" role="alert">
+        <button type="button" class="btn text-white btn-sm close-alert text-right" aria-label="Close">X</button>
+        <p>@TempData["messageError"]</p>
     </div>
 }
 
