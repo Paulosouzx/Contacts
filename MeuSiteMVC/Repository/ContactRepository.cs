@@ -20,9 +20,9 @@ namespace MeuSiteMVC.Repository
             return _bancoContext.Contacts.FirstOrDefault(x => x.ID == id);
         }
 
-        public List<ContactModel> GetAllPeople()
+        public List<ContactModel> GetAll(int userID)
         {
-             return _bancoContext.Contacts.ToList();
+             return _bancoContext.Contacts.Where(x => x.UserID == userID).ToList();
         }
 
         public ContactModel Adc(ContactModel contact)

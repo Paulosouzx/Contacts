@@ -5,8 +5,8 @@ namespace MeuSiteMVC.Repository
 {
     public interface IContactRepository
     {
+        List<ContactModel> GetAll(int userID);
         ContactModel IdList(int id);
-        List<ContactModel> GetAllPeople(); 
         ContactModel Adc(ContactModel contact);
         ContactModel Refresh(ContactModel contact);
         bool Delete(int id);
