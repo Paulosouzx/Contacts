@@ -1,4 +1,5 @@
-﻿using MeuSiteMVC.Models;
+﻿using MeuSiteMVC.Data.Map;
+using MeuSiteMVC.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace MeuSiteMVC.Data
@@ -11,5 +12,11 @@ namespace MeuSiteMVC.Data
 
         public DbSet<ContactModel> Contacts { get; set; }
         public DbSet<UserModel> Users { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new ContactMap());
+
+            base.OnModelCreating(modelBuilder); 
+        }
     }
 }
