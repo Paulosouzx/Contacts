@@ -23,6 +23,8 @@ namespace MeuSiteMVC.Models
         [Required(ErrorMessage = "Enter Contact's Phone")]
         [Phone(ErrorMessage = "Phone invalid")]
         public string Phone { get; set; }
+        public int? UserID { get; set; }
+        public UserModel User { get; set; }
 
     }
 }

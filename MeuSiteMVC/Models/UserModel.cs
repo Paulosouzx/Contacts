@@ -1,6 +1,7 @@
 ﻿using MeuSiteMVC.Enums;
 using MeuSiteMVC.Helper;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace MeuSiteMVC.Models
@@ -48,5 +49,7 @@ namespace MeuSiteMVC.Models
             Password = newPass.HashGenerator();
             return newPass;
         }
+
+        public virtual List<ContactModel> Contacts { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using MeuSiteMVC.Filters;
+using MeuSiteMVC.Helper;
 using MeuSiteMVC.Models;
 using MeuSiteMVC.Repository;
 using Microsoft.AspNetCore.Mvc;
@@ -12,15 +13,18 @@ namespace MeuSiteMVC.Controllers
     {
 
         private readonly IContactRepository _contactRepository;
+        private readonly ISessao _sessao;
 
-        public ContactController(IContactRepository contactRepository)
+        public ContactController(IContactRepository contactRepository, ISessao sessao)
         {
             _contactRepository = contactRepository;
+            _sessao = sessao;
         }
 
         public IActionResult Index()
         {
-            List<ContactModel> contacts = _contactRepository.GetAllPeople();
+            UserModel userLogin = _sessao.GetSessionUser();
+            List<ContactModel> contacts = _contactRepository.GetAll(userLogin.ID);
             return View(contacts);
         }
 
@@ -75,7 +79,8 @@ namespace MeuSiteMVC.Controllers
             {
                 if (ModelState.IsValid)
                 {
-
+                    UserModel userLogin = _sessao.GetSessionUser();
+                    contact.UserID = userLogin.ID;
                     _contactRepository.Adc(contact);
                     TempData["messageSuccess"] = "User added successfully";
                     return RedirectToAction("Index");
@@ -100,6 +105,8 @@ namespace MeuSiteMVC.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    UserModel userLogin = _sessao.GetSessionUser();
+                    contact.UserID = userLogin.ID;
                     _contactRepository.Refresh(contact);
                     TempData["messageSuccess"] = "User Altered successfully";
                     return RedirectToAction("Index");
