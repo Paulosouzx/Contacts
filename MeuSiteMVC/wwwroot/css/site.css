@@ -119,3 +119,9 @@ body {
         line-height: 32px; /* Centralizar verticalmente o texto */
         text-align: center; /* Centralizar horizontalmente o "X" */
     }
+
+#table-contacts td,
+#table-contacts th {
+    text-align: center;
+    vertical-align: middle;
+}
