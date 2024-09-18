@@ -51,5 +51,7 @@ namespace MeuSiteMVC.Models
         }
 
         public virtual List<ContactModel> Contacts { get; set; }
+
+
     }
 }
