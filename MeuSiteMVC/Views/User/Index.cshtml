@@ -36,6 +36,7 @@
                 <th scope="col">Login</th>
                 <th scope="col">Email</th>
                 <th scope="col">Perfil</th>
+                <th scope="col">Total Contacts</th>
                 <th scope="col">Registration Date</th>
                 <th scope="col"></th>
             </tr>
@@ -51,6 +52,12 @@
                         <td>@user.Login</td>
                         <td>@user.Email</td>
                         <td>@user.Perfil</td>
+                        <td>
+                              <a href="#" class="btn btn-success btn-sm btn-total-contacts">
+                                  @(user.Contacts != null && user.Contacts.Any() ? user.Contacts.Count() : 0)
+                              </a>
+
+                        </td>
                         <td>@user.DataRegistration</td>
                         <td>
 
@@ -71,6 +78,41 @@
         </tbody>
     </table>
 
+    <div class="modal fade" id="modalContactsUser" tabindex="-1" role="dialog" aria-labelledby="modalContactsUserLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalContactsUserLabel">User Contacts</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="display" id="table-contacts-user">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col">E-Mail</th>
+              <th scope="col">Phone</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>a</td>
+              <td>a</td>
+              <td>a</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
+
+
+</div>
+
 
 
