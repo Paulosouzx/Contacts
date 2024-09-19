@@ -1,23 +1,27 @@
-﻿
-
-$('.close-alert').on('click', function () {
+﻿$('.close-alert').on('click', function () {
     $('.alert').hide('hide');
 });
 
-
 $(document).ready(() => {
-    getDatatable('#table-contacts');
-    getDatatable('#table-user');
+    // Inicializa DataTables corretamente
+    $('#table-contacts').DataTable();
+    $('#table-user').DataTable();
 
-    // Use 'on' para eventos dinâmicos
-    $(document).on('click', '.btn-total-contacts', function () {
-        $('#modalContactsUser').modal('show');  // Abra o modal ao clicar no botão
+    $('.btn-total-contacts').click(function () {
+        var userID = $(this).attr('user-id');
+
+        $.ajax({
+            type: 'GET',
+            url: '/User/ContactListPerUserID/' + userID,
+            success: function (result) {
+                $("#contacts-list").html(result);
+                $('#table-contact-user').DataTable();
+                $('#modalContactsUser').modal('show');
+            }
+        });
     });
 });
 
-
-
-let table = new DataTable('#table-contacts', '#table-user');
 
 
 
