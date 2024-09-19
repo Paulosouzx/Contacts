@@ -1,5 +1,6 @@
 ﻿using MeuSiteMVC.Data;
 using MeuSiteMVC.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,7 +34,9 @@ namespace MeuSiteMVC.Repository
 
         public List<UserModel> GetAllPeople()
         {
-            return _bancoContext.Users.ToList();
+            return _bancoContext.Users
+                .Include(x => x.Contacts)
+                .ToList();
         }
 
         public UserModel Adc(UserModel user)

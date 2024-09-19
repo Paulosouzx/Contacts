@@ -12,10 +12,12 @@ namespace MeuSiteMVC.Controllers
     {
 
         private readonly IUserRepository _userRepository;
+        private readonly IContactRepository _contactRepository;
 
-        public UserController(IUserRepository userRepository)
+        public UserController(IUserRepository userRepository, IContactRepository contactRepository)
         {
             _userRepository = userRepository;
+            _contactRepository = contactRepository;
         }
 
         public IActionResult Index()
@@ -92,6 +94,13 @@ namespace MeuSiteMVC.Controllers
 
                 }
             }
+
+        public IActionResult ContactListPerUserID(int id)
+        {
+            List<ContactModel> contact = _contactRepository.GetAll(id);
+            return PartialView("_ContactUser", contact);
+        }
+
 
         [HttpPost]
         public IActionResult Editar(UserWithoutPassModel userWithoutPass)
